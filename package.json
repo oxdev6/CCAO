@@ -1,0 +1,27 @@
+{
+  "name": "ccao",
+  "version": "1.0.0",
+  "description": "Confidential Cross-Chain Asset Orchestrator",
+  "scripts": {
+    "compile": "cd contracts && forge build",
+    "test": "cd contracts && forge test",
+    "deploy:arbitrum": "node scripts/deploy-arbitrum.js",
+    "deploy:sepolia": "node scripts/deploy-sepolia.js",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "blockchain",
+    "defi",
+    "privacy",
+    "tee",
+    "iexec",
+    "cross-chain"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@iexec/sdk": "^8.0.0",
+    "ethers": "^6.0.0"
+  }
+}

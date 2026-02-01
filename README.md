@@ -1,0 +1,231 @@
+# 🌐 Confidential Cross-Chain Asset Orchestrator (CCAO)
+
+A privacy-preserving cross-chain asset processing and settlement engine that enables confidential sealed-bid mechanisms and private order matching for high-value assets across multiple Layer-2 networks using iExec's Confidential Compute stack and TEEs.
+
+## 💡 Vision
+
+CCAO solves two critical unsolved problems in current DeFi & RWA systems:
+
+1. **Confidential decision logic** for orders or evaluations (e.g., sealed bids or private pricing) without exposing sensitive inputs on public chains.
+2. **Secure cross-chain settlement** where execution and validation happen inside a trusted computing environment, and only verifiable outcomes are published on-chain.
+
+## ⚙️ Core Features
+
+### 🔐 1. Confidential Sealed-Bid Matching
+- Encrypted bid submission
+- TEE-based bid aggregation, sorting, and winner determination
+- On-chain outcome publication with attestation proofs
+- Prevents front-running and strategy leakage
+
+### ⚖️ 2. Private Asset Valuation for RWA
+- Confidential valuation and risk analysis inside TEE
+- Sensitive data (valuation models, financial details) stays off-chain
+- Only proofs of correct execution and summary results posted on-chain
+- Supports regulated use cases
+
+### ♻️ 3. Cross-Chain Settlement Bridge
+- Confidential compute determines settlement amounts
+- Cryptographically attested settlement results broadcast to multiple chains
+- Supports Arbitrum, Sepolia, and other EVM chains
+
+### 🔄 4. Verifiable Compliance Layer
+- Private compliance checks on encrypted identity proofs
+- Zero-knowledge compliance proofs without raw data exposure
+- Enables regulated, privacy-first asset markets
+
+## 🏗️ Architecture
+
+```
+┌─────────────────┐
+│   Frontend UI   │
+│  (Bid Submit)   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐      ┌──────────────────┐
+│  Smart Contract │◄─────┤  iExec TEE Task  │
+│   (Arbitrum)    │      │ (Confidential)   │
+└────────┬────────┘      └──────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Cross-Chain     │
+│ Settlement      │
+└─────────────────┘
+```
+
+## 📁 Project Structure
+
+```
+CCAO/
+├── contracts/          # Solidity smart contracts
+├── tee-tasks/          # iExec TEE confidential compute tasks
+├── frontend/           # React/Next.js UI
+├── bridge/             # Cross-chain messaging logic
+├── scripts/            # Deployment and utility scripts
+└── docs/               # Documentation
+
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Foundry (for contract compilation)
+- iExec SDK and account
+- MetaMask or compatible wallet
+- Python 3.11+ (for TEE tasks)
+
+### Installation
+
+```bash
+# Clone and setup
+git clone <repository-url>
+cd CCAO
+
+# Install root dependencies
+npm install
+
+# Install OpenZeppelin contracts
+cd contracts
+forge install OpenZeppelin/openzeppelin-contracts
+
+# Compile contracts
+forge build
+
+# Install frontend dependencies
+cd ../frontend
+npm install
+
+# Setup environment variables
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+### Configuration
+
+1. **Environment Variables** (`.env`):
+   - `PRIVATE_KEY`: Your wallet private key
+   - `ARBITRUM_RPC_URL`: Arbitrum RPC endpoint
+   - `SEPOLIA_RPC_URL`: Sepolia RPC endpoint
+   - `IEXEC_APP_ADDRESS`: iExec app addresses (after deployment)
+   - `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`: WalletConnect project ID
+
+2. **Deploy Contracts**:
+   ```bash
+   # Deploy to Arbitrum
+   npm run deploy:arbitrum
+   
+   # Deploy to Sepolia
+   npm run deploy:sepolia
+   ```
+
+3. **Deploy TEE Tasks**:
+   ```bash
+   # Build Docker images for each TEE task
+   cd tee-tasks/bid-matching
+   docker build -t ccao-bid-matching .
+   
+   # Deploy to iExec (requires iExec SDK setup)
+   node ../../scripts/iexec-deploy.js
+   ```
+
+4. **Start Frontend**:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+### Usage
+
+1. **Create an Auction**:
+   - Connect wallet as owner
+   - Call `createAuction()` on `SealedBidAuction` contract
+   - Set asset token, amount, reserve price, and duration
+
+2. **Submit Encrypted Bid**:
+   - Connect wallet
+   - Encrypt bid with auction's public key
+   - Submit via frontend or directly to contract
+   - Bid is stored encrypted on-chain
+
+3. **Match Bids**:
+   - Owner closes bidding period
+   - Trigger iExec TEE task with encrypted bids
+   - TEE matches bids confidentially
+   - Results published on-chain with attestation
+
+4. **Settle Cross-Chain**:
+   - Settlement computed in TEE
+   - Cross-chain message sent
+   - Settlement executed on target chain
+
+## 🔐 Security
+
+- All sensitive computations run inside iExec TEEs
+- Encrypted bid submission with public key cryptography
+- Verifiable attestation proofs for all TEE executions
+- Zero-knowledge compliance proofs
+
+## 📚 Documentation
+
+- [Architecture Overview](./docs/ARCHITECTURE.md) - Detailed system architecture
+- Smart Contract documentation in `contracts/`
+- TEE Task documentation in `tee-tasks/`
+
+## 🔧 Development
+
+### Testing
+
+```bash
+# Test contracts
+cd contracts
+forge test
+
+# Test TEE tasks locally
+cd tee-tasks/bid-matching
+python app.py  # With test input.json
+```
+
+### Project Structure Details
+
+- **contracts/**: Solidity smart contracts for auctions, settlement, and compliance
+- **tee-tasks/**: Python TEE tasks for confidential compute
+  - `bid-matching/`: Sealed-bid matching logic
+  - `asset-valuation/`: RWA valuation engine
+  - `compliance-check/`: KYC/AML verification
+- **frontend/**: Next.js React application
+- **bridge/**: Cross-chain messaging utilities
+- **scripts/**: Deployment and utility scripts
+
+## 🎯 Use Cases
+
+### Institutional Tokenized Bonds
+- Private pricing discovery
+- Confidential order matching
+- Cross-chain settlement
+
+### Real Estate Tokenization
+- Confidential property valuation
+- Private auction mechanisms
+- Secure cross-chain transfers
+
+### Private Equity
+- Sealed-bid fundraising
+- Confidential investor matching
+- Privacy-preserving compliance
+
+## 🤝 Contributing
+
+This is a research and development project. Contributions welcome!
+
+## 📄 License
+
+MIT
+
+## 🙏 Acknowledgments
+
+- iExec for TEE infrastructure
+- OpenZeppelin for secure contract libraries
+- The DeFi and RWA communities

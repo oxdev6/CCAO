@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+dist/
+build/
+.next/
+cache/
+artifacts/
+*.log
+.DS_Store
+coverage/
+*.sol.js
+lib/
+out/
