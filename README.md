@@ -2,6 +2,17 @@
 
 A privacy-preserving cross-chain asset processing and settlement engine that enables confidential sealed-bid mechanisms and private order matching for high-value assets across multiple Layer-2 networks using iExec's Confidential Compute stack and TEEs.
 
+### Where is the iExec application?
+
+The **iExec application** is the TEE task that runs confidential bid matching. It lives here:
+
+- **App root:** [`tee-tasks/bid-matching/`](tee-tasks/bid-matching/)
+- **Manifest:** [`tee-tasks/bid-matching/iexec.json`](tee-tasks/bid-matching/iexec.json) — iExec app descriptor (owner, name, type, Docker image, TEE framework)
+- **Entrypoint:** [`tee-tasks/bid-matching/app.py`](tee-tasks/bid-matching/app.py) — runs in the container; reads `IEXEC_IN`, writes `IEXEC_OUT`
+- **Image:** [`tee-tasks/bid-matching/Dockerfile`](tee-tasks/bid-matching/Dockerfile) — build and push to Docker Hub, then set `app.multiaddr` and `app.checksum` in `iexec.json` before deploying with `scripts/iexec-deploy.js` or the iExec SDK.
+
+Two other iExec TEE tasks in this repo: `tee-tasks/asset-valuation/` and `tee-tasks/compliance-check/`; each has its own `iexec.json` for deployment.
+
 ## 💡 Vision
 
 CCAO solves two critical unsolved problems in current DeFi & RWA systems:

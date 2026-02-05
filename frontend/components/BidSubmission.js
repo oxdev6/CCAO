@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { LockIcon } from './Icons';
 
-export default function BidSubmission({ account, provider }) {
+export default function BidSubmission({ account, provider, initialAuctionId }) {
   const [auctionId, setAuctionId] = useState('');
   const [bidAmount, setBidAmount] = useState('');
   const [encryptedBid, setEncryptedBid] = useState(null);
@@ -11,6 +11,13 @@ export default function BidSubmission({ account, provider }) {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('');
   const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // When user clicks an auction in the list, prefill its ID here
+  useEffect(() => {
+    if (initialAuctionId != null && initialAuctionId !== '') {
+      setAuctionId(String(initialAuctionId));
+    }
+  }, [initialAuctionId]);
 
   // Generate escrow address (in production, this would be TEE-generated)
   const generateEscrowAddress = async () => {
@@ -173,7 +180,7 @@ export default function BidSubmission({ account, provider }) {
 
         <button
           onClick={handleSubmitBid}
-          disabled={loading || !account}
+          disabled={loading}
           className="w-full px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
         >
           {loading ? 'Submitting...' : 'Submit Encrypted Bid'}

@@ -6,7 +6,7 @@ import AuctionList from '../components/AuctionList';
 import ComplianceCheck from '../components/ComplianceCheck';
 import Dashboard from '../components/Dashboard';
 import CreateAuction from '../components/CreateAuction';
-import { GlobeIcon, LockIcon, ChartIcon, CheckIcon } from '../components/Icons';
+import { GlobeIcon, LockIcon, ChartIcon, CheckIcon, PlusIcon } from '../components/Icons';
 import WalletConnector from '../components/WalletConnector';
 import WalletInstaller from '../components/WalletInstaller';
 
@@ -18,6 +18,7 @@ export default function Home() {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showInstaller, setShowInstaller] = useState(false);
   const [walletName, setWalletName] = useState(null);
+  const [selectedAuctionId, setSelectedAuctionId] = useState(null);
 
   useEffect(() => {
     // Check if already connected
@@ -60,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-950 to-black">
       <Head>
         <title>CCAO - Confidential Cross-Chain Asset Orchestrator</title>
         <meta name="description" content="Privacy-preserving cross-chain asset processing and settlement" />
@@ -208,8 +209,16 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <AuctionList account={account} provider={provider} />
-                  <BidSubmission account={account} provider={provider} />
+                  <AuctionList
+                    account={account}
+                    provider={provider}
+                    onSelectAuction={(id) => setSelectedAuctionId(id)}
+                  />
+                  <BidSubmission
+                    account={account}
+                    provider={provider}
+                    initialAuctionId={selectedAuctionId}
+                  />
                 </>
               )}
             </div>

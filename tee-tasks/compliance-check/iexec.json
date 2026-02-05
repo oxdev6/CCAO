@@ -1,0 +1,13 @@
+{
+  "description": "CCAO verifiable compliance check TEE task. Runs inside iExec TEE; reads inputs from IEXEC_IN, writes compliance result to IEXEC_OUT.",
+  "app": {
+    "owner": "0x0000000000000000000000000000000000000000",
+    "name": "ccao-compliance-check",
+    "type": "DOCKER",
+    "multiaddr": "docker.io/your-docker-user/ccao-compliance-check:latest",
+    "checksum": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "mrenclave": {
+      "framework": "SCONE"
+    }
+  }
+}

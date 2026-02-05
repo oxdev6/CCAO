@@ -1,0 +1,13 @@
+{
+  "description": "CCAO private asset valuation TEE task. Runs inside iExec TEE; reads inputs from IEXEC_IN, writes valuation result to IEXEC_OUT.",
+  "app": {
+    "owner": "0x0000000000000000000000000000000000000000",
+    "name": "ccao-asset-valuation",
+    "type": "DOCKER",
+    "multiaddr": "docker.io/your-docker-user/ccao-asset-valuation:latest",
+    "checksum": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "mrenclave": {
+      "framework": "SCONE"
+    }
+  }
+}

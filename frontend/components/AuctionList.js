@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
-export default function AuctionList({ account, provider }) {
+export default function AuctionList({ account, provider, onSelectAuction }) {
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (provider) {
-      loadAuctions();
-    }
+    // For now we always load mock auctions so the UI
+    // works even before a wallet is connected.
+    loadAuctions();
   }, [provider]);
 
   const loadAuctions = async () => {
@@ -79,9 +79,11 @@ export default function AuctionList({ account, provider }) {
       ) : (
         <div className="space-y-4">
           {auctions.map((auction) => (
-            <div
+            <button
               key={auction.id}
-              className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+              type="button"
+              onClick={() => onSelectAuction && onSelectAuction(auction.id)}
+              className="w-full text-left border border-gray-200 rounded-lg p-4 hover:shadow-md hover:border-primary-400 transition focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <div className="flex justify-between items-start mb-2">
                 <div>
@@ -129,7 +131,7 @@ export default function AuctionList({ account, provider }) {
                   Ends: {new Date(auction.endTime).toLocaleString()}
                 </div>
               )}
-            </div>
+            </button>
           ))}
         </div>
       )}
