@@ -1,6 +1,33 @@
 # 🌐 Confidential Cross-Chain Asset Orchestrator (CCAO)
 
-A privacy-preserving cross-chain asset processing and settlement engine that enables confidential sealed-bid mechanisms and private order matching for high-value assets across multiple Layer-2 networks using iExec's Confidential Compute stack and TEEs.
+A privacy-preserving cross-chain asset processing and settlement engine that enables confidential sealed-bid mechanisms and private order matching for high-value assets across multiple Layer-2 networks using **iExec's Confidential Compute stack and TEEs**.
+
+---
+
+## 👉 For Judges
+
+**What we built:** A full-stack demo for confidential sealed-bid auctions: React/Next.js frontend, Solidity contracts (Foundry), and three iExec TEE tasks (Python + Docker) for bid matching, asset valuation, and compliance. Bids are encrypted; matching runs in TEE; settlement is designed for cross-chain (Arbitrum, Sepolia).
+
+**Quick run (local):**
+```bash
+git clone https://github.com/oxdev6/CCAO.git && cd CCAO
+npm install && cd frontend && npm install && npm run dev
+```
+Open **http://localhost:3000**. Connect a wallet (MetaMask recommended). Click an auction card to prefill the bid form, enter amount, and submit (demo mode; contract deployment is documented below).
+
+**Where to look:**
+| What | Where |
+|------|--------|
+| **iExec application** | [`tee-tasks/bid-matching/`](tee-tasks/bid-matching/) — manifest: [`iexec.json`](tee-tasks/bid-matching/iexec.json) |
+| **Smart contracts** | [`contracts/`](contracts/) — `SealedBidAuction.sol`, `CrossChainSettlement.sol`, `ComplianceVerifier.sol` |
+| **Frontend** | [`frontend/`](frontend/) — Next.js, `pages/index.js`, `components/` |
+| **Deploy scripts** | [`scripts/`](scripts/) — `iexec-deploy.js`, `deploy-sepolia.js`, `deploy-arbitrum.js` |
+| **Hackathon feedback** | [`feedback.md`](feedback.md) |
+
+**Tech stack:** Next.js 14, Ethers.js, Solidity (OpenZeppelin), Foundry, Python 3.11, Docker, iExec SDK.  
+**License:** MIT.
+
+---
 
 ### Where is the iExec application?
 

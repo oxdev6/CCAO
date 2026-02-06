@@ -12,3 +12,13 @@ coverage/
 *.sol.js
 lib/
 out/
+
+# AI / editor and IDE
+.cursor/
+.cursorrules
+.claude/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
