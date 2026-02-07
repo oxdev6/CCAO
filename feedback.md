@@ -15,11 +15,6 @@ We built CCAO (Confidential Cross-Chain Asset Orchestrator) as a privacy-preserv
 - **End-to-end wiring**: Connecting the frontend to a live contract and to iExec task execution in a short timeframe was tight; we focused on a working UI and clear contract + TEE interfaces, with deployment and env config documented for post-hackathon completion.
 - **Wallet and UX**: We improved wallet detection and made the submit button and auction selection responsive so the demo flow is clear.
 
-## Suggestions for organizers
-
-- A short “judge checklist” (e.g. “run frontend”, “where is the iExec app”, “how to test”) in the hackathon instructions helps judges evaluate quickly.
-- Clear rules on whether `feedback.md` is required and what to include (e.g. experience, challenges, suggestions) would keep submissions consistent.
-
 ## Takeaways
 
 We’re leaving the hackathon with a clean, documented codebase that shows confidential sealed-bid auctions with iExec TEE and cross-chain settlement. We plan to deploy contracts and iExec apps to testnets and complete the full on-chain + TEE flow.

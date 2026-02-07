@@ -1,0 +1,21 @@
+{
+  "network": "anvil",
+  "chainId": 31337,
+  "rpcUrl": "http://127.0.0.1:8545",
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "timestamp": "2026-02-07T13:44:24Z",
+  "contracts": {
+    "SealedBidAuction": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "txHash": "0x397983a6d87a36cfab13fda351254f5078ad6ce09e7521b9abbe3fab923d7a9f"
+    },
+    "CrossChainSettlement": {
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0x1c14756d6b6d8c156b1fa24543af79b6c4eaad5aa4bfde3fb93b6bdb454d7a6a"
+    },
+    "ComplianceVerifier": {
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "txHash": "0xf4d2c80628cdc70a7e9ffd8c4301f1b802f2ac0596f3449a700fb7a9491d6a60"
+    }
+  }
+}

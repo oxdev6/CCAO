@@ -1,0 +1,24 @@
+{
+  "network": "arbitrum-sepolia",
+  "chainId": 421614,
+  "rpcUrl": "https://arb-sepolia.g.alchemy.com/v2/Mo-9AKHlb7NTANfE2ZWCV",
+  "deployer": "0x2b8Cc3b41B5a52C46A3550d15F4DE997E5e3DB9D",
+  "timestamp": "2026-02-07T14:18:23Z",
+  "contracts": {
+    "SealedBidAuction": {
+      "address": "0xEc428110548F129A8c62E5BF1Cb4Bd1638a15328",
+      "txHash": "0xe30d77f5e48530fe684d76018263a7abc2bab86c4ddf06fb40d58cadf8b8544c",
+      "blockNumber": 240581990
+    },
+    "CrossChainSettlement": {
+      "address": "0x5b461b398B44E7c05180b3F20CB1B7f601d29A63",
+      "txHash": "0x9592c5e5bfca5615a4ef3da44e83d657535eca4884e2062154616d5a4b41cd37",
+      "blockNumber": 240582043
+    },
+    "ComplianceVerifier": {
+      "address": "0xD886398499dd7bA5A638d01b1c794E6820a5943d",
+      "txHash": "0x7ca48813ec6f88dcd4c3dd7546be1ebbfcc8bc085102b9d0ca3c0b07a1da8cd7",
+      "blockNumber": 240582067
+    }
+  }
+}
