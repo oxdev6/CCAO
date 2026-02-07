@@ -1,7 +1,7 @@
 {
   "network": "arbitrum-sepolia",
   "chainId": 421614,
-  "rpcUrl": "https://arb-sepolia.g.alchemy.com/v2/Mo-9AKHlb7NTANfE2ZWCV",
+  "rpcUrl": "https://arb-sepolia.g.alchemy.com/v2/<ALCHEMY_API_KEY>",
   "deployer": "0x2b8Cc3b41B5a52C46A3550d15F4DE997E5e3DB9D",
   "timestamp": "2026-02-07T14:18:23Z",
   "contracts": {

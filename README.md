@@ -127,10 +127,11 @@ npm install
 
 # Install OpenZeppelin contracts
 cd contracts
-forge install OpenZeppelin/openzeppelin-contracts
+forge install OpenZeppelin/openzeppelin-contracts@v4.9.6
+forge install foundry-rs/forge-std
 
 # Compile contracts
-forge build
+forge build --via-ir
 
 # Install frontend dependencies
 cd ../frontend
@@ -158,6 +159,45 @@ cp .env.example .env
    # Deploy to Sepolia
    npm run deploy:sepolia
    ```
+
+### Deployed Contracts
+
+#### Arbitrum Sepolia (chainId: `421614`)
+
+Deployed: `2026-02-07`  
+Deployer: `0x2b8Cc3b41B5a52C46A3550d15F4DE997E5e3DB9D`
+
+| Contract | Address |
+| --- | --- |
+| `SealedBidAuction` | `0xEc428110548F129A8c62E5BF1Cb4Bd1638a15328` |
+| `CrossChainSettlement` | `0x5b461b398B44E7c05180b3F20CB1B7f601d29A63` |
+| `ComplianceVerifier` | `0xD886398499dd7bA5A638d01b1c794E6820a5943d` |
+
+Deployment record: [`deployments/arbitrum-sepolia.json`](deployments/arbitrum-sepolia.json)
+
+**Quick interactions (Foundry `cast`):**
+```bash
+RPC_URL="https://arb-sepolia.g.alchemy.com/v2/<ALCHEMY_API_KEY>"
+
+cast call 0xEc428110548F129A8c62E5BF1Cb4Bd1638a15328 "auctionCounter()(uint256)" --rpc-url "$RPC_URL"
+cast call 0x5b461b398B44E7c05180b3F20CB1B7f601d29A63 "owner()(address)" --rpc-url "$RPC_URL"
+cast call 0xD886398499dd7bA5A638d01b1c794E6820a5943d "requireCompliance()(bool)" --rpc-url "$RPC_URL"
+```
+
+**Deploying with Foundry (recommended):**
+```bash
+export PRIVATE_KEY="<YOUR_PRIVATE_KEY>"
+export RPC_URL="https://arb-sepolia.g.alchemy.com/v2/<ALCHEMY_API_KEY>"
+
+cd contracts
+forge build --via-ir
+
+forge create SealedBidAuction.sol:SealedBidAuction --rpc-url "$RPC_URL" --private-key "$PRIVATE_KEY" --broadcast --via-ir
+forge create CrossChainSettlement.sol:CrossChainSettlement --rpc-url "$RPC_URL" --private-key "$PRIVATE_KEY" --broadcast --via-ir
+forge create ComplianceVerifier.sol:ComplianceVerifier --rpc-url "$RPC_URL" --private-key "$PRIVATE_KEY" --broadcast --via-ir
+```
+
+**Security note:** never commit `.env`, private keys, or RPC provider API keys. The deployment JSON uses a placeholder RPC URL.
 
 3. **Deploy TEE Tasks**:
    ```bash
